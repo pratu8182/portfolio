@@ -72,19 +72,38 @@ $(document).ready(function(){
     });
 });
 
-const scriptURL = '<SCRIPT URL>'
-  const form = document.forms['submit-to-google-sheet']
-  const msg = document.getElementById("msg");
+// const scriptURL = '<SCRIPT URL>'
+//   const form = document.forms['submit-to-google-sheet']
+//   const msg = document.getElementById("msg");
 
-  form.addEventListener('submit', e => {
-    e.preventDefault()
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response =>{
-        msg.innerHTML = "Message send successfully"
-        setTimeout(function(){
-            msg.innerHTML = ""
-        },4000)
-        form.reset()
-      })
-      .catch(error => console.error('Error!', error.message))
-  })
+//   form.addEventListener('submit', e => {
+//     e.preventDefault()
+//     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+//       .then(response =>{
+//         msg.innerHTML = "Message send successfully"
+//         setTimeout(function(){
+//             msg.innerHTML = ""
+//         },4000)
+//         form.reset()
+//       })
+//       .catch(error => console.error('Error!', error.message))
+//   })
+
+                            const scriptURL = 'https://script.google.com/macros/s/AKfycbx-Z5oP2VTbY0qR80Z6JHpu2ZsGtzaNbj-tzYE0HnE_8IimHyShcmu-tzl8PTrXJzN_6A/exec';
+                            const form = document.forms['submit-to-google-sheet'];
+                            const msg = document.getElementById('msg');
+                        
+                            form.addEventListener('submit', e => {
+                                e.preventDefault();
+                                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                                    .then(response => {
+                                        msg.innerHTML = "Message sent successfully!";
+                                        setTimeout(() => msg.innerHTML = "", 5000);
+                                        form.reset();
+                                    })
+                                    .catch(error => {
+                                        msg.innerHTML = "Error: Message not sent.";
+                                        setTimeout(() => msg.innerHTML = "", 5000);
+                                        console.error('Error!', error.message);
+                                    });
+                            });
